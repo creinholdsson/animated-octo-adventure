@@ -1,0 +1,100 @@
+out_to_x no
+own_window no
+out_to_console yes
+background no
+max_text_width 0
+
+# Update interval in seconds
+update_interval 10.0
+
+# This is the number of times Conky will update before quitting.
+# Set to zero to run forever.
+total_run_times 0
+
+# Shortens units to a single character (kiB->k, GiB->G, etc.). Default is off.
+short_units yes
+
+# How strict should if_up be when testing an interface for being up?
+# The value is one of up, link or address, to check for the interface
+# being solely up, being up and having link or being up, having link
+# and an assigned IP address. 
+if_up_strictness address
+
+# Add spaces to keep things from moving about?  This only affects certain objects.
+# use_spacer should have an argument of left, right, or none
+use_spacer none
+
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale no
+
+# number of cpu samples to average
+# set to 1 to disable averaging
+cpu_avg_samples 2
+
+
+
+TEXT
+#mpd displaying song
+#$mpd_smart | \
+##CPU load for all 4 cores
+#1:${cpu cpu1}% 2:${cpu cpu2}% 3:${cpu cpu3}% 4:${cpu cpu4}% | \
+## json output for i3-bar
+
+[
+	{
+		"full_text" : "cpu",
+		"color": "\#f5f5f5"
+	},	
+	{
+		"full_text": "1:${cpu cpu1}%",
+		"color": "${if_match ${cpu cpu1}<20}\#228B22${endif}${if_match ${cpu cpu1}<70}\#DAA520${else}\#B22222${endif}"
+	},
+	{
+		"full_text": "2:${cpu cpu2}%",
+		"color": "${if_match ${cpu cpu2}<20}\#228B22${endif}${if_match ${cpu cpu2}<70}\#DAA520${else}\#B22222${endif}"
+	},
+	{
+		"full_text": "3:${cpu cpu3}%",
+		"color": "${if_match ${cpu cpu3}<20}\#228B22${endif}${if_match ${cpu cpu3}<70}\#DAA520${else}\#B22222${endif}"
+	},
+	{
+		"full_text": "4:${cpu cpu4}%",
+		"color": "${if_match ${cpu cpu4}<20}\#228B22${endif}${if_match ${cpu cpu4}<70}\#DAA520${else}\#B22222${endif}"
+	},
+	{
+		"full_text" : "mem",
+		"color": "\#f5f5f5"
+	},
+	{
+		"full_text": "${memperc}% (${mem})",
+		"color": "${if_match ${memperc}<40}\#228B22${endif}${if_match ${memperc}<70}\#DAA520${else}\#B22222${endif}"
+	},
+	{
+		"full_text" : "eth",
+		"color" : "\#f5f5f5"
+	},
+	{
+		"full_text" : "${if_up eth0}${downspeed eth0}${upspeed eth0}${else}down${endif}",
+		"color" : "${if_up eth0}\#228B22${else}\#B22222${endif}"
+	},
+	{
+		"full_text" : "wlan",
+		"color": "\#f5f5f5"
+	},
+	{
+		"full_text" : "${if_up wlan0}${wireless_essid wlan0} ${wireless_link_qual wlan0} ${downspeed wlan0} ${upspeed wlan0}${else} down${endif}",
+		"color" : "${if_up wlan0}\#228B22${else}\#B22222${endif}"
+	},
+	{
+		"full_text" : "bat",
+		"color" : "\#f5f5f5"
+	},
+	{
+		"full_text" : "${battery_short}",
+		"color": "${if_match ${battery_percent}>70}\#228B22${endif}${if_match ${battery_percent}>30}\#DAA520${else}\#B22222${endif}"
+	},  
+	{ 
+		"full_text" : "${time %a %d %b %H:%M}", 
+		"color" : "\#ffffff" 
+	}
+],
