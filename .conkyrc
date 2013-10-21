@@ -90,7 +90,7 @@ TEXT
 		"color" : "\#f5f5f5"
 	},
 	{
-		"full_text" : "${battery_short}",
+		"full_text" : "${if_match ${battery_percent}>0}${battery_short}${else}-${endif}",
 		"color": "${if_match ${battery_percent}>70}\#228B22${endif}${if_match ${battery_percent}>30}\#DAA520${else}\#B22222${endif}"
 	},  
 	{ 
