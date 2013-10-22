@@ -31,14 +31,10 @@ override_utf8_locale no
 # set to 1 to disable averaging
 cpu_avg_samples 2
 
-
+lua_load ~/bin/fixed_width_output.lua
 
 TEXT
-#mpd displaying song
-#$mpd_smart | \
-##CPU load for all 4 cores
-#1:${cpu cpu1}% 2:${cpu cpu2}% 3:${cpu cpu3}% 4:${cpu cpu4}% | \
-## json output for i3-bar
+
 
 [
 	{
@@ -46,19 +42,19 @@ TEXT
 		"color": "\#f5f5f5"
 	},	
 	{
-		"full_text": "1:${cpu cpu1}%",
+		"full_text": "1:${lua_parse fixedwidth %2.0f ${cpu cpu1}}%",
 		"color": "${if_match ${cpu cpu1}<20}\#228B22${endif}${if_match ${cpu cpu1}<70}\#DAA520${else}\#B22222${endif}"
 	},
 	{
-		"full_text": "2:${cpu cpu2}%",
+		"full_text": "2:${lua_parse fixedwidth %2.0f ${cpu cpu2}}%",
 		"color": "${if_match ${cpu cpu2}<20}\#228B22${endif}${if_match ${cpu cpu2}<70}\#DAA520${else}\#B22222${endif}"
 	},
 	{
-		"full_text": "3:${cpu cpu3}%",
+		"full_text": "3:${lua_parse fixedwidth %2.0f ${cpu cpu3}}%",
 		"color": "${if_match ${cpu cpu3}<20}\#228B22${endif}${if_match ${cpu cpu3}<70}\#DAA520${else}\#B22222${endif}"
 	},
 	{
-		"full_text": "4:${cpu cpu4}%",
+		"full_text": "4:${lua_parse fixedwidth %2.0f ${cpu cpu4}}%",
 		"color": "${if_match ${cpu cpu4}<20}\#228B22${endif}${if_match ${cpu cpu4}<70}\#DAA520${else}\#B22222${endif}"
 	},
 	{
@@ -66,7 +62,7 @@ TEXT
 		"color": "\#f5f5f5"
 	},
 	{
-		"full_text": "${memperc}% (${mem})",
+		"full_text": "${lua_parse fixedwidth %2.0f ${memperc}}% (${mem})",
 		"color": "${if_match ${memperc}<40}\#228B22${endif}${if_match ${memperc}<70}\#DAA520${else}\#B22222${endif}"
 	},
 	{
@@ -94,7 +90,7 @@ TEXT
 		"color": "${if_match ${battery_percent}>70}\#228B22${endif}${if_match ${battery_percent}>30}\#DAA520${else}\#B22222${endif}"
 	},
 	{
-		"full_text" : "vol ${exec bin/volume}",
+		"full_text" : "vol ${lua_parse fixedwidth %4s ${exec bin/volume}}",
 		"color" : "\#f5f5f5"
 	},  
 	{ 
