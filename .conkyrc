@@ -79,7 +79,7 @@ TEXT
 		"color": "\#f5f5f5"
 	},
 	{
-		"full_text" : "${if_up wlan0}${wireless_essid wlan0} ${downspeedf wlan0} ${upspeedf wlan0}${else} down${endif}",
+		"full_text" : "${if_up wlan0}${wireless_essid wlan0} ↓${downspeedf wlan0} ↑${upspeedf wlan0}${else}down${endif}",
 		"color" : "\#${lua_parse colorize 75 50 ${wireless_link_qual wlan0}}"
 	},
 	{
@@ -88,10 +88,10 @@ TEXT
 	},
 	{
 		"full_text" : "${if_match ${battery_percent}>0}${battery_short}${else}-${endif}",
-		"color": "\#${lua_parse colorize 75 40 ${battery_percent}}"
+		"color": "${if_match ${battery_percent}>0}\#${lua_parse colorize 75 40 ${battery_percent}}${else}\#B22222${endif}"
 	},
 	{
-		"full_text" : "vol ${lua_parse fixedwidth %4s ${exec bin/volume}}",
+		"full_text" : "♪ ${lua_parse fixedwidth %4s ${exec ~/bin/volume}}",
 		"color" : "\#f5f5f5"
 	},  
 	{ 
