@@ -157,4 +157,14 @@ bindsym $mod+r mode "resize"
 bar {
 	position top
         status_command /home/nibbler/bin/conky-i3bar
+
+     colors {
+        background #000000
+        statusline #ffffff
+
+        focused_workspace  #000000 #000000 #228B22
+        active_workspace   #000000 #000000 #ffffff
+        inactive_workspace #000000 #000000 #DAA520
+        urgent_workspace   #000000 #000000 #B22222
+    }
 }
