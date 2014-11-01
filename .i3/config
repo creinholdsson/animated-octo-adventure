@@ -166,7 +166,7 @@ for_window [class="Firefox"] border none
 # finds out, if available)
 bar {
 	position top
-        status_command /home/nibbler/bin/conky-i3bar
+        status_command ~/bin/conky-i3bar
 
      colors {
         background #000000
